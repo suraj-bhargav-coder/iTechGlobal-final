@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 460" fill="none">
+  <defs>
+    <linearGradient id="canvas" x1="30" y1="20" x2="650" y2="440" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FCFF"/>
+      <stop offset="1" stop-color="#E5F3FA"/>
+    </linearGradient>
+    <linearGradient id="hub" x1="262" y1="154" x2="418" y2="310" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#075F91"/>
+      <stop offset="1" stop-color="#023F68"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="680" height="460" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="9"/>
+      <feOffset dy="8"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope=".14"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="1" y="1" width="678" height="458" rx="22" fill="url(#canvas)"/>
+  <circle cx="340" cy="230" r="184" stroke="#C8E6F4" stroke-dasharray="3 9"/>
+  <circle cx="340" cy="230" r="132" stroke="#D8EDF7"/>
+  <path d="M170 112C219 112 238 161 273 190M510 112C461 112 442 161 407 190M170 348C219 348 238 299 273 270M510 348C461 348 442 299 407 270" stroke="#70CFF5" stroke-linecap="round" stroke-width="2.5"/>
+  <circle cx="273" cy="190" r="5" fill="#00A9F1"/>
+  <circle cx="407" cy="190" r="5" fill="#00A9F1"/>
+  <circle cx="273" cy="270" r="5" fill="#00A9F1"/>
+  <circle cx="407" cy="270" r="5" fill="#00A9F1"/>
+  <g filter="url(#shadow)">
+    <rect x="30" y="58" width="190" height="108" rx="16" fill="#fff"/>
+    <rect x="460" y="58" width="190" height="108" rx="16" fill="#fff"/>
+    <rect x="30" y="294" width="190" height="108" rx="16" fill="#fff"/>
+    <rect x="460" y="294" width="190" height="108" rx="16" fill="#fff"/>
+    <rect x="242" y="152" width="196" height="156" rx="22" fill="url(#hub)"/>
+  </g>
+  <g stroke="#00A9F1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+    <path d="M60 99a13 13 0 0 1 25-4 10 10 0 0 1 1 20H61a8 8 0 0 1-1-16Z"/>
+    <path d="M491 91h28v29h-28zM498 99h6m4 0h8m-18 7h6m4 0h8m-18 7h6m4 0h8"/>
+    <path d="m62 346 10 10 10-10m-10 10v19m-13-5v10h26v-10"/>
+    <path d="M494 329h23v18h-23zM494 354h23v18h-23zM521 341h10v20h-10"/>
+  </g>
+  <g fill="#073D5B" font-family="Segoe UI, Arial, sans-serif">
+    <text x="101" y="102" font-size="12" font-weight="700">CLOUD</text>
+    <text x="101" y="122" font-size="11" fill="#5B7180">Platforms &amp; services</text>
+    <text x="536" y="102" font-size="12" font-weight="700">BUSINESS SYSTEMS</text>
+    <text x="536" y="122" font-size="11" fill="#5B7180">Connected operations</text>
+    <text x="101" y="346" font-size="12" font-weight="700">DIGITAL PRODUCTS</text>
+    <text x="101" y="366" font-size="11" fill="#5B7180">Web &amp; software</text>
+    <text x="536" y="346" font-size="12" font-weight="700">IT &amp; SECURITY</text>
+    <text x="536" y="366" font-size="11" fill="#5B7180">Reliable foundations</text>
+  </g>
+  <g>
+    <circle cx="340" cy="196" r="19" fill="#00A9F1"/>
+    <path d="M340 185v22m-8-11h16m-14-7 12 14m0-14-12 14" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <text x="340" y="238" text-anchor="middle" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.2">iTech Global</text>
+    <text x="340" y="258" text-anchor="middle" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">Technology that works together</text>
+    <rect x="285" y="275" width="110" height="5" rx="2.5" fill="#62CFF5"/>
+    <rect x="309" y="275" width="62" height="5" rx="2.5" fill="#fff"/>
+  </g>
+</svg>

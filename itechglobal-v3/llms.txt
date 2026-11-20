@@ -1,0 +1,19 @@
+# iTech Global
+
+> iTech Global helps organizations connect business systems, modernize cloud environments, and develop digital products for practical business needs.
+
+## What We Do
+- EDI, API, and B2B integration
+- Cloud and enterprise application integration
+- Cloud and IT solutions
+- Digital product and custom software development
+- Workflow and business process automation
+
+## Explore
+- [Home](/): Company overview and services
+- [Services](/#services): Consulting and product services
+- [Technology](/#technology): Integration and engineering capabilities
+- [Contact](/#contact): Project and business enquiries
+
+## Contact
+- Email: info@itechglobal.in
