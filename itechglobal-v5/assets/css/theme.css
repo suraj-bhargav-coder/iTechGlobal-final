@@ -101,6 +101,9 @@
     .footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     .top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border:0;border-radius:50%;display:none;background:linear-gradient(120deg,var(--accent),var(--accent2));color:#05121f;font-weight:800;box-shadow:0 12px 24px rgba(0,169,241,.28)}
 
+    /* MilesWeb injects this hosting badge at page level. */
+    #wp-force-footer{display:none !important}
+
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
     .reveal.show{opacity:1;transform:translateY(0)}
     body:not(.has-js) .reveal{opacity:1;transform:none}
