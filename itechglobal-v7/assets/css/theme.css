@@ -50,19 +50,7 @@
     .section{padding:76px 0}
     .hero,.section{position:relative;isolation:isolate;overflow:hidden}
     .hero>*,.section>*{position:relative;z-index:2}
-    .hero::before,.section::before,.hero::after,.section::after{content:"";position:absolute;inset:-40% -10%;pointer-events:none;z-index:0;opacity:0;background:radial-gradient(circle at 18% 20%,var(--hover-a,rgba(2,83,130,.14)),transparent 36%),radial-gradient(circle at 78% 30%,var(--hover-b,rgba(0,169,241,.13)),transparent 40%),radial-gradient(circle at 62% 78%,var(--hover-c,rgba(2,83,130,.10)),transparent 36%);background-size:150% 150%;transition:opacity .35s ease,transform .7s ease,filter .7s ease}
-    .hero::before,.section::before{transform:scale(1.14) rotate(-8deg);filter:blur(1px) saturate(130%)}
-    .hero::after,.section::after{transform:scale(1.22) rotate(10deg);filter:blur(18px) saturate(165%);mix-blend-mode:screen}
-    .hero:hover::before,.section:hover::before{opacity:var(--hover-opacity-main,.9);animation:sectionHoverFlow var(--hover-speed-main,6s) linear infinite;transform:scale(1.02) rotate(3deg)}
-    .hero:hover::after,.section:hover::after{opacity:var(--hover-opacity-glow,.75);animation:sectionHoverPulse var(--hover-speed-glow,4.2s) ease-in-out infinite alternate;transform:scale(1.08) rotate(-4deg)}
-    @keyframes sectionHoverFlow{0%{background-position:0% 0%,100% 0%,50% 100%}50%{background-position:100% 50%,0% 100%,20% 0%}100%{background-position:0% 0%,100% 0%,50% 100%}}
-    @keyframes sectionHoverPulse{0%{background-position:15% 20%,80% 25%,55% 80%;filter:blur(20px) saturate(155%)}50%{background-position:85% 42%,18% 70%,42% 22%;filter:blur(14px) saturate(180%)}100%{background-position:10% 12%,88% 86%,62% 10%;filter:blur(22px) saturate(170%)}}
-    #home{--hover-a:rgba(2,83,130,.34);--hover-b:rgba(0,169,241,.24);--hover-c:rgba(18,34,56,.18);--hover-speed-main:5.6s;--hover-speed-glow:3.6s;--hover-opacity-main:.9;--hover-opacity-glow:.72}
-    #services{--hover-a:rgba(0,169,241,.28);--hover-b:rgba(2,83,130,.24);--hover-c:rgba(118,177,255,.2);--hover-speed-main:5.1s;--hover-speed-glow:3.2s;--hover-opacity-main:.9;--hover-opacity-glow:.7}
-    #process{--hover-a:rgba(2,83,130,.28);--hover-b:rgba(0,169,241,.22);--hover-c:rgba(0,169,241,.16);--hover-speed-main:5.3s;--hover-speed-glow:3.3s;--hover-opacity-main:.9;--hover-opacity-glow:.7}
-    #about{--hover-a:rgba(0,169,241,.24);--hover-b:rgba(2,83,130,.22);--hover-c:rgba(2,83,130,.18);--hover-speed-main:5.5s;--hover-speed-glow:3.5s;--hover-opacity-main:.9;--hover-opacity-glow:.68}
-    #faq{--hover-a:rgba(0,169,241,.24);--hover-b:rgba(2,83,130,.2);--hover-c:rgba(2,83,130,.16);--hover-speed-main:4.9s;--hover-speed-glow:3.0s;--hover-opacity-main:.9;--hover-opacity-glow:.68}
-    #contact{--hover-a:rgba(2,83,130,.34);--hover-b:rgba(0,169,241,.28);--hover-c:rgba(142,202,230,.22);--hover-speed-main:4.6s;--hover-speed-glow:2.8s;--hover-opacity-main:.92;--hover-opacity-glow:.76}
+    .hero::before,.section::before,.hero::after,.section::after{display:none}
     .section-head{text-align:center;max-width:760px;margin:0 auto 36px}
     .section-head p{color:var(--muted)}
     .grid3,.grid4{display:grid;gap:16px}
@@ -104,9 +92,10 @@
     /* MilesWeb injects this hosting badge at page level. */
     #wp-force-footer{display:none !important}
 
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-    .reveal.show{opacity:1;transform:translateY(0)}
-    body:not(.has-js) .reveal{opacity:1;transform:none}
+    .reveal{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
+    body.has-js .section .reveal{opacity:0;transform:translateY(18px)}
+    body.has-js .section .reveal.show{opacity:1;transform:translateY(0)}
 
     @media (max-width:1024px){
       .hero-grid,.contact{grid-template-columns:1fr}

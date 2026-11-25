@@ -3,7 +3,14 @@
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="dns-prefetch" href="https://static.cloudflareinsights.com">
   <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin>
+  <?php
+  $theme_ver    = file_exists(get_template_directory().'/assets/css/theme.css') ? filemtime(get_template_directory().'/assets/css/theme.css') : '';
+  $redesign_ver = file_exists(get_template_directory().'/assets/css/redesign.css') ? filemtime(get_template_directory().'/assets/css/redesign.css') : '';
+  ?>
+  <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/css/theme.css?ver=<?php echo esc_attr($theme_ver); ?>" as="style">
+  <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/css/redesign.css?ver=<?php echo esc_attr($redesign_ver); ?>" as="style">
   <?php if (is_front_page() || is_page_template('page-home.php')) : ?>
   <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-technology-platforms.svg" as="image" type="image/svg+xml" fetchpriority="high">
   <?php endif; ?>
@@ -19,7 +26,7 @@
 <header class="site-header">
     <div class="logo-strip-full">
       <div class="container nav">
-        <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="iTech Global home"><img class="brand-mark" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-logo.png" alt="iTech Global" width="512" height="512" decoding="async"></a>
+        <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="iTech Global home"><img class="brand-mark" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-logo.png" alt="iTech Global" width="58" height="58" decoding="async"></a>
         <button class="menu-btn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-nav">
           <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
           <span class="menu-label">Menu</span>

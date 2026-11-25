@@ -1,8 +1,8 @@
 <?php
 function itechglobal_enqueue_assets() {
-  $theme_css = get_template_directory() . '/assets/css/theme.css';
+  $theme_css    = get_template_directory() . '/assets/css/theme.css';
   $redesign_css = get_template_directory() . '/assets/css/redesign.css';
-  $theme_js = get_template_directory() . '/assets/js/theme.js';
+  $theme_js     = get_template_directory() . '/assets/js/theme.js';
 
   wp_enqueue_style(
     'itechglobal-theme',
@@ -25,6 +25,8 @@ function itechglobal_enqueue_assets() {
   );
 }
 add_action('wp_enqueue_scripts', 'itechglobal_enqueue_assets');
+
+
 
 function itechglobal_disable_frontend_emojis() {
   remove_action('wp_head', 'print_emoji_detection_script', 7);

@@ -781,7 +781,12 @@ h3 {
   transform: none;
 }
 
-.reveal.show {
+body.has-js .section .reveal {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+body.has-js .section .reveal.show {
   animation: enter-soft .45s ease both;
 }
 
@@ -794,12 +799,6 @@ h3 {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-body:not(.has-js) .reveal {
-  opacity: 1;
-  transform: none;
-  animation: none;
 }
 
 @media (max-width: 1024px) {
@@ -1032,7 +1031,7 @@ body:not(.has-js) .reveal {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal.show {
+  body.has-js .section .reveal.show {
     animation: none;
   }
 
@@ -1202,7 +1201,6 @@ body {
   grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
   align-items: center;
   gap: clamp(38px, 6vw, 82px);
-  min-height: 480px;
 }
 
 .hero-copy {
@@ -1315,6 +1313,9 @@ body {
 }
 
 .technology-illustration {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 680 / 460;
   border-radius: 16px;
 }
 
