@@ -52,7 +52,7 @@ add_action('init', 'itechglobal_disable_frontend_emojis');
 
 function itechglobal_brand_identity_markup() {
   $logo = get_template_directory_uri() . '/assets/itech-logo.png';
-  $icon = get_template_directory_uri() . '/assets/itech-logo.png';
+  $icon = get_template_directory_uri() . '/assets/itech-site-icon.png';
   $site_url = home_url('/');
 
   $organization = array(
@@ -92,6 +92,25 @@ function itechglobal_brand_identity_markup() {
     '</script>' . "\n";
 }
 add_action('wp_head', 'itechglobal_brand_identity_markup', 2);
+
+// Serve the theme icon at the site root without requiring a permalink flush.
+function itechglobal_serve_favicon($wp) {
+  $request_path = isset($_SERVER['REQUEST_URI']) ? wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) : '';
+  $site_path = wp_parse_url(home_url('/'), PHP_URL_PATH);
+  $favicon_path = untrailingslashit($site_path) . '/favicon.ico';
+  if (untrailingslashit($request_path) !== untrailingslashit($favicon_path)) return;
+
+  $file = get_template_directory() . '/favicon.ico';
+  if (!is_readable($file)) {
+    status_header(404);
+    exit;
+  }
+  header('Content-Type: image/x-icon');
+  header('Cache-Control: public, max-age=604800');
+  readfile($file);
+  exit;
+}
+add_action('parse_request', 'itechglobal_serve_favicon', 0);
 
 function itechglobal_defer_scripts($tag, $handle, $src) {
   if (in_array($handle, array('itechglobal-theme', 'itechglobal-contact-form'), true)) {
@@ -169,13 +188,13 @@ function itechglobal_meta_description() {
 add_action('wp_head', 'itechglobal_meta_description', 1);
 
 function itechglobal_robots_txt($output, $public) {
-  if (!$public || strpos($output, 'Sitemap:') !== false) {
-    return $output;
-  }
+  if (!$public) return $output;
 
-  return rtrim($output) . "\nSitemap: " . esc_url_raw(home_url('/wp-sitemap.xml')) . "\n";
+  // Keep one sitemap URL in sync with the public sitemap endpoint.
+  $output = preg_replace('/^Sitemap:\\s*.*\\R?/mi', '', $output);
+  return rtrim($output) . "\nSitemap: " . esc_url_raw(home_url('/sitemap.xml')) . "\n";
 }
-add_filter('robots_txt', 'itechglobal_robots_txt', 10, 2);
+add_filter('robots_txt', 'itechglobal_robots_txt', 99, 2);
 
 function itechglobal_serve_llms_txt($wp) {
   if (empty($_SERVER['REQUEST_URI'])) {

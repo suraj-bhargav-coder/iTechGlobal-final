@@ -7,9 +7,8 @@
   <?php if (is_front_page() || is_page_template('page-home.php')) : ?>
   <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-technology-platforms.svg" as="image" type="image/svg+xml" fetchpriority="high">
   <?php endif; ?>
-  <link rel="icon" type="image/png" sizes="48x48" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/favicon-48.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-logo.png">
+  <link rel="icon" href="<?php echo esc_url(home_url('/favicon.ico')); ?>" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-site-icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/apple-touch-icon.png">
   <link rel="manifest" href="<?php echo esc_url(get_template_directory_uri()); ?>/manifest.webmanifest">
   <?php wp_head(); ?>
