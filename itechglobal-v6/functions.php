@@ -1,16 +1,9 @@
 <?php
 function itechglobal_enqueue_assets() {
-  $style_css = get_template_directory() . '/style.css';
   $theme_css = get_template_directory() . '/assets/css/theme.css';
   $redesign_css = get_template_directory() . '/assets/css/redesign.css';
   $theme_js = get_template_directory() . '/assets/js/theme.js';
 
-  wp_enqueue_style(
-    'itechglobal-style',
-    get_stylesheet_uri(),
-    array(),
-    file_exists($style_css) ? (string) filemtime($style_css) : null
-  );
   wp_enqueue_style(
     'itechglobal-theme',
     get_template_directory_uri() . '/assets/css/theme.css',
@@ -33,6 +26,56 @@ function itechglobal_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'itechglobal_enqueue_assets');
 
+function itechglobal_disable_frontend_emojis() {
+  remove_action('wp_head', 'print_emoji_detection_script', 7);
+  remove_action('wp_print_styles', 'print_emoji_styles');
+  remove_action('wp_enqueue_scripts', 'wp_enqueue_emoji_styles');
+}
+add_action('init', 'itechglobal_disable_frontend_emojis');
+
+function itechglobal_brand_identity_markup() {
+  $logo = get_template_directory_uri() . '/assets/itech-logo.png';
+  $icon = get_template_directory_uri() . '/assets/itech-logo.png';
+  $site_url = home_url('/');
+
+  $organization = array(
+    '@context' => 'https://schema.org',
+    '@type' => 'Organization',
+    'name' => 'iTech Global',
+    'url' => $site_url,
+    'logo' => array(
+      '@type' => 'ImageObject',
+      'url' => $logo,
+      'width' => 512,
+      'height' => 512,
+    ),
+  );
+
+  $website = array(
+    '@context' => 'https://schema.org',
+    '@type' => 'WebSite',
+    'name' => 'iTech Global',
+    'alternateName' => 'iTech',
+    'url' => $site_url,
+  );
+
+  printf(
+    "<link rel=\"icon\" type=\"image/png\" sizes=\"512x512\" href=\"%1\$s\">\n",
+    esc_url($icon)
+  );
+  printf(
+    "<meta property=\"og:site_name\" content=\"iTech Global\">\n<meta property=\"og:image\" content=\"%1\$s\">\n<meta property=\"og:image:width\" content=\"512\">\n<meta property=\"og:image:height\" content=\"512\">\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:image\" content=\"%1\$s\">\n",
+    esc_url($logo)
+  );
+  echo '<script type="application/ld+json">' .
+    wp_json_encode($organization, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) .
+    '</script>' . "\n";
+  echo '<script type="application/ld+json">' .
+    wp_json_encode($website, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) .
+    '</script>' . "\n";
+}
+add_action('wp_head', 'itechglobal_brand_identity_markup', 2);
+
 function itechglobal_defer_scripts($tag, $handle, $src) {
   if (in_array($handle, array('itechglobal-theme', 'itechglobal-contact-form'), true)) {
     if (strpos($tag, ' defer') === false) {
@@ -43,20 +86,6 @@ function itechglobal_defer_scripts($tag, $handle, $src) {
   return $tag;
 }
 add_filter('script_loader_tag', 'itechglobal_defer_scripts', 10, 3);
-
-function itechglobal_preload_styles($html, $handle, $href, $media) {
-  if (in_array($handle, array('itechglobal-theme', 'itechglobal-redesign'), true)) {
-    return sprintf(
-      '<link rel="preload" href="%1$s" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' .
-      '<noscript><link rel="stylesheet" href="%1$s" media="%2$s"></noscript>',
-      esc_url($href),
-      esc_attr($media)
-    );
-  }
-
-  return $html;
-}
-add_filter('style_loader_tag', 'itechglobal_preload_styles', 10, 4);
 
 function itechglobal_theme_support() {
   add_theme_support('title-tag');

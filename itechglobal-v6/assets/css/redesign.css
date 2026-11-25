@@ -1048,7 +1048,7 @@ body:not(.has-js) .reveal {
   --page: #f4f9fc;
   --ink: #103650;
   --text: #20394c;
-  --muted: #647a8b;
+  --muted: #526779;
   --line: rgba(2, 83, 130, .13);
   --shadow: 0 22px 60px rgba(2, 54, 88, .1);
 }
@@ -1759,7 +1759,7 @@ body {
   padding: 25px 0;
   border-color: rgba(2, 83, 130, .12);
   background: #fff;
-  color: #647a8b;
+  color: var(--muted);
   font-size: .83rem;
 }
 
@@ -2252,7 +2252,7 @@ body {
 
 .contact-form-privacy {
   max-width: 255px;
-  color: #6b8190;
+  color: #526779;
   font-size: .68rem;
   line-height: 1.5;
 }

@@ -1,0 +1,26 @@
+{
+  "name": "iTech Global",
+  "short_name": "iTech",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#025382",
+  "icons": [
+    {
+      "src": "/wp-content/themes/itechglobal-v5/assets/favicon-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/wp-content/themes/itechglobal-v5/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/wp-content/themes/itechglobal-v5/assets/itech-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
