@@ -14,13 +14,13 @@ function itechglobal_enqueue_assets() {
   wp_enqueue_style(
     'itechglobal-theme',
     get_template_directory_uri() . '/assets/css/theme.css',
-    array('itechglobal-style'),
+    array(),
     file_exists($theme_css) ? (string) filemtime($theme_css) : null
   );
   wp_enqueue_style(
     'itechglobal-redesign',
     get_template_directory_uri() . '/assets/css/redesign.css',
-    array('itechglobal-theme'),
+    array(),
     file_exists($redesign_css) ? (string) filemtime($redesign_css) : null
   );
   wp_enqueue_script(
@@ -32,6 +32,31 @@ function itechglobal_enqueue_assets() {
   );
 }
 add_action('wp_enqueue_scripts', 'itechglobal_enqueue_assets');
+
+function itechglobal_defer_scripts($tag, $handle, $src) {
+  if (in_array($handle, array('itechglobal-theme', 'itechglobal-contact-form'), true)) {
+    if (strpos($tag, ' defer') === false) {
+      return str_replace(' src=', ' defer src=', $tag);
+    }
+  }
+
+  return $tag;
+}
+add_filter('script_loader_tag', 'itechglobal_defer_scripts', 10, 3);
+
+function itechglobal_preload_styles($html, $handle, $href, $media) {
+  if (in_array($handle, array('itechglobal-theme', 'itechglobal-redesign'), true)) {
+    return sprintf(
+      '<link rel="preload" href="%1$s" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' .
+      '<noscript><link rel="stylesheet" href="%1$s" media="%2$s"></noscript>',
+      esc_url($href),
+      esc_attr($media)
+    );
+  }
+
+  return $html;
+}
+add_filter('style_loader_tag', 'itechglobal_preload_styles', 10, 4);
 
 function itechglobal_theme_support() {
   add_theme_support('title-tag');

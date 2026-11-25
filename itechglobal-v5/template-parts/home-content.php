@@ -37,6 +37,10 @@
           class="technology-illustration"
           src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-technology-platforms.svg"
           alt="iTech Global enterprise integration connecting business applications, cloud platforms, and digital systems."
+          width="680"
+          height="460"
+          decoding="async"
+          fetchpriority="high"
         >
         <div class="hero-card-caption">
           <span>One connected technology ecosystem.</span>

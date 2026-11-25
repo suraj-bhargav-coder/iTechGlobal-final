@@ -72,10 +72,13 @@ h3 {
 
 .brand-mark {
   display: block;
-  width: 40px;
-  height: 40px;
-  border-radius: 9px;
-  object-fit: cover;
+  width: auto;
+  height: 58px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  background: #fff;
+  object-fit: contain;
+  filter: contrast(1.12) saturate(1.08);
 }
 
 .brand-name {
@@ -1079,9 +1082,13 @@ body {
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: auto;
+  height: 58px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  background: #fff;
+  object-fit: contain;
+  filter: contrast(1.12) saturate(1.08);
 }
 
 .brand-name {

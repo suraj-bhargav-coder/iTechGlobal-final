@@ -3,7 +3,11 @@
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-global-icon.svg">
+  <?php if (is_front_page() || is_page_template('page-home.php')) : ?>
+  <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-logo.png" as="image" type="image/png">
+  <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-technology-platforms.svg" as="image" type="image/svg+xml">
+  <?php endif; ?>
+  <link rel="icon" type="image/png" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-site-icon.png">
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -11,7 +15,7 @@
 <header class="site-header">
     <div class="logo-strip-full">
       <div class="container nav">
-        <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="iTech Global home"><img class="brand-mark" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-site-icon.png" alt=""><span class="brand-name">iTech <strong>Global</strong></span></a>
+        <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="iTech Global home"><img class="brand-mark" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-logo.png" alt="iTech Global" width="512" height="512" fetchpriority="high" decoding="async"></a>
         <button class="menu-btn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-nav">
           <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
           <span class="menu-label">Menu</span>

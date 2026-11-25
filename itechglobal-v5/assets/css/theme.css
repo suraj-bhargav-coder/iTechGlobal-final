@@ -22,7 +22,7 @@
     .logo-strip-full{background:#ffffff;border-bottom:1px solid rgba(0,0,0,.08)}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:78px}
     .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800}
-    .brand img{height:44px;width:auto;display:block}
+    .brand img{height:58px;width:auto;display:block;padding:4px 6px;background:#ffffff;border-radius:8px;filter:contrast(1.12) saturate(1.08)}
     .logo-strip{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:12px;background:#ffffff;border:1px solid rgba(0,0,0,.08);box-shadow:0 10px 22px rgba(0,0,0,.18)}
     .nav-links{display:flex;align-items:center;gap:18px}
     .nav-links a{font-weight:700;color:#1a2a3a}
