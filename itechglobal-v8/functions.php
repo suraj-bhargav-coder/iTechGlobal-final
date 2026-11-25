@@ -1,21 +1,6 @@
 <?php
 function itechglobal_enqueue_assets() {
-  $theme_css    = get_template_directory() . '/assets/css/theme.css';
-  $redesign_css = get_template_directory() . '/assets/css/redesign.css';
-  $theme_js     = get_template_directory() . '/assets/js/theme.js';
-
-  wp_enqueue_style(
-    'itechglobal-theme',
-    get_template_directory_uri() . '/assets/css/theme.css',
-    array(),
-    file_exists($theme_css) ? (string) filemtime($theme_css) : null
-  );
-  wp_enqueue_style(
-    'itechglobal-redesign',
-    get_template_directory_uri() . '/assets/css/redesign.css',
-    array(),
-    file_exists($redesign_css) ? (string) filemtime($redesign_css) : null
-  );
+  $theme_js = get_template_directory() . '/assets/js/theme.js';
   wp_enqueue_script(
     'itechglobal-theme',
     get_template_directory_uri() . '/assets/js/theme.js',
@@ -25,6 +10,36 @@ function itechglobal_enqueue_assets() {
   );
 }
 add_action('wp_enqueue_scripts', 'itechglobal_enqueue_assets');
+
+// Generate a resized WebP copy of the logo for use in the header nav.
+// Produces itech-logo-50.webp (50px) and itech-logo-100.webp (100px for 2x retina).
+function itechglobal_generate_logo_webp() {
+  $src = get_template_directory() . '/assets/itech-logo.png';
+  if ( ! is_readable($src) || ! function_exists('imagecreatefrompng') || ! function_exists('imagewebp') ) {
+    return;
+  }
+  $sizes = array( 50, 100 );
+  foreach ( $sizes as $size ) {
+    $dest = get_template_directory() . '/assets/itech-logo-' . $size . '.webp';
+    if ( file_exists($dest) ) continue;
+    $src_img = @imagecreatefrompng($src);
+    if ( ! $src_img ) continue;
+    $resized = imagescale($src_img, $size, $size, IMG_BICUBIC);
+    imagedestroy($src_img);
+    if ( ! $resized ) continue;
+    imagewebp($resized, $dest, 82);
+    imagedestroy($resized);
+  }
+}
+add_action('init', 'itechglobal_generate_logo_webp');
+
+function itechglobal_inline_styles() {
+  $theme_file    = get_template_directory() . '/assets/css/theme.css';
+  $redesign_file = get_template_directory() . '/assets/css/redesign.css';
+  if ( ! is_readable($theme_file) || ! is_readable($redesign_file) ) return;
+  echo '<style>' . file_get_contents($theme_file) . file_get_contents($redesign_file) . '</style>' . "\n";
+}
+add_action('wp_head', 'itechglobal_inline_styles', 1);
 
 
 
@@ -88,6 +103,30 @@ function itechglobal_defer_scripts($tag, $handle, $src) {
   return $tag;
 }
 add_filter('script_loader_tag', 'itechglobal_defer_scripts', 10, 3);
+
+// Delay Cloudflare beacon until after page load so it never blocks LCP/FCP.
+function itechglobal_delay_cloudflare_beacon() {
+  echo "<script>" .
+    "(function(){" .
+    "function loadCFBeacon(){" .
+    "var s=document.querySelector('script[src*=\"cloudflareinsights\"]');" .
+    "if(s&&s.getAttribute('data-cf-delayed'))return;" .
+    "var all=document.querySelectorAll('script[src*=\"cloudflareinsights\"]');" .
+    "all.forEach(function(el){" .
+    "var n=document.createElement('script');" .
+    "n.src=el.src;n.defer=true;" .
+    "var token=el.getAttribute('data-cf-beacon');" .
+    "if(token)n.setAttribute('data-cf-beacon',token);" .
+    "n.setAttribute('data-cf-delayed','1');" .
+    "el.parentNode.replaceChild(n,el);" .
+    "});" .
+    "}" .
+    "if(document.readyState==='complete'){loadCFBeacon();}" .
+    "else{window.addEventListener('load',loadCFBeacon,{once:true});}" .
+    "})();" .
+    "</script>\n";
+}
+add_action('wp_footer', 'itechglobal_delay_cloudflare_beacon', 100);
 
 function itechglobal_theme_support() {
   add_theme_support('title-tag');

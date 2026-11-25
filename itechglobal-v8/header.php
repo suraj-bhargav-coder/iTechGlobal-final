@@ -4,13 +4,6 @@
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="dns-prefetch" href="https://static.cloudflareinsights.com">
-  <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin>
-  <?php
-  $theme_ver    = file_exists(get_template_directory().'/assets/css/theme.css') ? filemtime(get_template_directory().'/assets/css/theme.css') : '';
-  $redesign_ver = file_exists(get_template_directory().'/assets/css/redesign.css') ? filemtime(get_template_directory().'/assets/css/redesign.css') : '';
-  ?>
-  <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/css/theme.css?ver=<?php echo esc_attr($theme_ver); ?>" as="style">
-  <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/css/redesign.css?ver=<?php echo esc_attr($redesign_ver); ?>" as="style">
   <?php if (is_front_page() || is_page_template('page-home.php')) : ?>
   <link rel="preload" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/itech-technology-platforms.svg" as="image" type="image/svg+xml" fetchpriority="high">
   <?php endif; ?>
